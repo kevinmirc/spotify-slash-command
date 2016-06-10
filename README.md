@@ -1,5 +1,3 @@
-# spotify-slash-command
-
 # Spotify Slash Command for Mixmax
 This is a MixMax extension for adding music to your composition window.
 
