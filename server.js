@@ -15,8 +15,6 @@ var corsOptions = {
 
 app.get('/typeahead', cors(corsOptions), require('./api/typeahead'));
 app.get('/resolver', cors(corsOptions), require('./api/resolver'));
-// app.use('/resolver', admin);
-
 
 app.get('/logo', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/images/spotify_logo.png'));
