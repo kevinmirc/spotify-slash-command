@@ -1,19 +1,19 @@
-// The API that returns the in-email representation.
 var spotify = require('../spotify');
 var _       = require('underscore');
+var sample_track = require('../sample_track')
 
 module.exports = function(req, res) {
   if (!req.query || !req.query.text) {
     res.send(400)
   } else {
-    console.log(req.query);
     var track_id = req.query.text.split("(").pop().slice(0, -1);
+    console.log("TRACK ID", track_id);
   }
 
-  var response;
+  var response; // use `var results = sample_track` to render track without an api call
 
   try {
-    spotify.find('track', track_id, function (data) {
+    spotify.find('tracks', track_id, function (data) {
       response = data;
     });
   } catch (e) {
@@ -21,29 +21,23 @@ module.exports = function(req, res) {
     return;
   }
 
-  var track = JSON.parse(response.body);
+  if (response.statusCode !== 200 || !response.body) {
+    res.status(500).send('Error 004');
+    return;
+  }
 
-  // if (res_body.error) {
-  //   res.send(500, res_body.error);
-  // }
+  var results = _.chain(JSON.parse(response.body)).value();
 
-  // if (response.statusCode !== 200 || !response.body) {
-  //   res.status(500).send('Error 004');
-  //   return;
-  // }
+  console.log(results)
 
-  console.log(track)
-  res.render('card', {track: track});
+  if (results.error) {
+    res.send(500, results.error);
+  }
 
-  // load template(s), send that as the body in the api response
-  // return json with body being the template
+  res.render('card', {track: results})
 
-  // if (results.length === 0) {
-  //   res.json([{
-  //     title: '<i>(no results)</i>',
-  //     text: ''
-  //   }]);
-  // } else {
-  //   res.render('card', {track: results[0]});
-  // }
+  // res.json({
+  //   body: html
+  // });
+  // <iframe src="http://localhost??"></iframe> maybe?
 };

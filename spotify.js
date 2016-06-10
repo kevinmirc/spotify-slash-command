@@ -21,7 +21,7 @@ var spotify = {
 
   search: function (type, search, callback) {
     var q = search.split(" ").join("%20");
-    var url = `https://api.spotify.com/v1/search?q=${q}&type=${type}&limit=8`
+    var url = `https://api.spotify.com/v1/search?q=${q}&type=${type}&limit=8`;
 
     request(url, function (err, res, body) {
       if (err) { throw err };
@@ -31,7 +31,7 @@ var spotify = {
 
   searchSync: function (type, search, callback) {
     var q = search.split(" ").join("%20");
-    var url = `https://api.spotify.com/v1/search?q=${q}&type=${type}&limit=8`
+    var url = `https://api.spotify.com/v1/search?q=${q}&type=${type}&limit=8`;
 
     var response = sync("GET", url, function (err, res, body) {
       if (err) { throw err };
@@ -50,15 +50,15 @@ var spotify = {
       }
     };
 
-    var url = `https://api.spotify.com/v1/${type}/${id}`
+    var url = `https://api.spotify.com/v1/${type}/${id}`;
 
     var response = sync('GET', url, options, function (err, res, body) {
       if (err) {throw err};
       return res;
     });
-    // maybe parse to json before returning
+
     callback(response);
-  },
+  }
 }
 
 module.exports = spotify
