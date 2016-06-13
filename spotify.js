@@ -42,15 +42,13 @@ var spotify = {
   },
 
   find: function (type, id, callback) {
+    var url = `https://api.spotify.com/v1/${type}/${id}`;
     var token = this.requestToken();
-
     var options = {
       headers: {
         'Authorization': `Bearer ${token.access_token}`
       }
     };
-
-    var url = `https://api.spotify.com/v1/${type}/${id}`;
 
     var response = sync('GET', url, options, function (err, res, body) {
       if (err) {throw err};

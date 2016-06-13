@@ -1,6 +1,6 @@
-var spotify = require('../spotify');
-var _       = require('underscore');
-var sample_track = require('../sample_track')
+var spotify       = require('../spotify');
+var _             = require('underscore');
+var sample_track  = require('../fixtures/sample_track')
 
 module.exports = function(req, res) {
   if (!req.query || !req.query.text) {
@@ -35,9 +35,4 @@ module.exports = function(req, res) {
   }
 
   res.render('card', {track: results})
-
-  // res.json({
-  //   body: html
-  // });
-  // <iframe src="http://localhost??"></iframe> maybe?
 };
