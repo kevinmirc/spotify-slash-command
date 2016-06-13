@@ -5,6 +5,7 @@ This is a MixMax extension for adding music to your composition window.
 
 1. Install using `npm install`
 2. Run using `npm start`
+3. Add Spotify credentials `process.env.spotify_client_id` and `process.env.spotify_client_secret`
 
 To simulate locally how Mixmax calls the typeahead URL (to return a JSON list of typeahead results), run:
 
